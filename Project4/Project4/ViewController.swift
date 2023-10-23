@@ -11,6 +11,7 @@ import WebKit
 class ViewController: UIViewController, WKNavigationDelegate {
 
     var webView : WKWebView!
+    var progressView : UIProgressView!
     
     override func loadView() {
         webView = WKWebView()
@@ -23,7 +24,15 @@ class ViewController: UIViewController, WKNavigationDelegate {
         // Do any additional setup loading the view.
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(openTapped))
-        let url = URL(string: "https://www.google.com")!
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
+        progressView = UIProgressView(progressViewStyle: .default)
+        progressView.sizeToFit()
+        let progressButton = UIBarButtonItem(customView: progressView)
+        
+        toolbarItems = [progressButton, spacer, refresh]
+        navigationController?.isToolbarHidden = false
+        let url = URL(string: "https://www.apple.com")!
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
         
