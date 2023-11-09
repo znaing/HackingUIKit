@@ -57,7 +57,7 @@ class ViewController: UITableViewController {
             if isOriginal(word: lowercase){
                 if isReal(word: lowercase){
                     if lowercase.count > 3 {
-                        usedWords.insert(answer, at: 0)
+                        usedWords.insert(lowercase, at: 0)
                         let indexPath = IndexPath(row: 0, section: 0)
                         tableView.insertRows(at: [indexPath], with: .automatic)
                         return
